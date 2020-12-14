@@ -4,7 +4,7 @@
 #
 Name     : Vulkan-Loader
 Version  : 1.2.157
-Release  : 52
+Release  : 53
 URL      : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.2.157/Vulkan-Loader-1.2.157.tar.gz
 Source0  : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.2.157/Vulkan-Loader-1.2.157.tar.gz
 Summary  : Vulkan Loader
