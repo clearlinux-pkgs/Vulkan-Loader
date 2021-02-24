@@ -4,7 +4,7 @@
 #
 Name     : Vulkan-Loader
 Version  : 1.2.170
-Release  : 59
+Release  : 60
 URL      : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.2.170/Vulkan-Loader-1.2.170.tar.gz
 Source0  : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.2.170/Vulkan-Loader-1.2.170.tar.gz
 Summary  : Vulkan Loader
@@ -23,7 +23,7 @@ BuildRequires : gcc-libstdc++32
 BuildRequires : glibc-dev32
 BuildRequires : glibc-libc32
 BuildRequires : libX11-dev
-BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86misc-dev libXxf86vm-dev
+BuildRequires : libX11-dev libICE-dev libSM-dev libXau-dev libXcomposite-dev libXcursor-dev libXdamage-dev libXdmcp-dev libXext-dev libXfixes-dev libXft-dev libXi-dev libXinerama-dev libXi-dev libXmu-dev libXpm-dev libXrandr-dev libXrender-dev libXres-dev libXScrnSaver-dev libXt-dev libXtst-dev libXv-dev libXxf86vm-dev
 BuildRequires : libX11-dev32
 BuildRequires : pkg-config
 BuildRequires : pkgconfig(32libudev)
