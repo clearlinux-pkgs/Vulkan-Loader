@@ -73,6 +73,7 @@ libvulkan.so.1:vkCreateEvent
 libvulkan.so.1:vkCreateFence
 libvulkan.so.1:vkCreateFramebuffer
 libvulkan.so.1:vkCreateGraphicsPipelines
+libvulkan.so.1:vkCreateHeadlessSurfaceEXT
 libvulkan.so.1:vkCreateImage
 libvulkan.so.1:vkCreateImageView
 libvulkan.so.1:vkCreateInstance
