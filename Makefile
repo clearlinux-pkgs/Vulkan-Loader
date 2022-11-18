@@ -1,5 +1,5 @@
 PKG_NAME := Vulkan-Loader
-URL = https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.234/Vulkan-Loader-1.3.234.tar.gz
+URL = https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.235/Vulkan-Loader-1.3.235.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
