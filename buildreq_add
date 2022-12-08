@@ -2,5 +2,4 @@
 # picked up automatically. One name per line, no whitespace.
 Vulkan-Headers-dev
 libX11-dev
-Vulkan-Headers-dev32
 libX11-dev32

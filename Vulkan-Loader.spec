@@ -4,7 +4,7 @@
 #
 Name     : Vulkan-Loader
 Version  : 1.3.236
-Release  : 114
+Release  : 115
 URL      : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.236/Vulkan-Loader-1.3.236.tar.gz
 Source0  : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.236/Vulkan-Loader-1.3.236.tar.gz
 Summary  : Vulkan Loader
@@ -13,7 +13,6 @@ License  : Apache-2.0
 Requires: Vulkan-Loader-lib = %{version}-%{release}
 Requires: Vulkan-Loader-license = %{version}-%{release}
 BuildRequires : Vulkan-Headers-dev
-BuildRequires : Vulkan-Headers-dev32
 BuildRequires : buildreq-cmake
 BuildRequires : extra-cmake-modules pkgconfig(xcb) xcb-util-cursor-dev xcb-util-image-dev xcb-util-keysyms-dev xcb-util-renderutil-dev xcb-util-wm-dev xcb-util-dev
 BuildRequires : gcc-dev32
@@ -97,7 +96,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1670264871
+export SOURCE_DATE_EPOCH=1670519704
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -141,7 +140,7 @@ cd ../clr-build32;
 make test || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1670264871
+export SOURCE_DATE_EPOCH=1670519704
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/Vulkan-Loader
 cp %{_builddir}/Vulkan-Loader-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/Vulkan-Loader/9bf8124f4495a48c4fd7104aebe2e957176b930b
