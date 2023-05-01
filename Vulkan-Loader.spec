@@ -4,10 +4,10 @@
 # Using build pattern: cmake
 #
 Name     : Vulkan-Loader
-Version  : 1.3.248
-Release  : 126
-URL      : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.248/Vulkan-Loader-1.3.248.tar.gz
-Source0  : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.248/Vulkan-Loader-1.3.248.tar.gz
+Version  : 1.3.249
+Release  : 127
+URL      : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.249/Vulkan-Loader-1.3.249.tar.gz
+Source0  : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.249/Vulkan-Loader-1.3.249.tar.gz
 Summary  : Vulkan Loader
 Group    : Development/Tools
 License  : Apache-2.0
@@ -85,25 +85,25 @@ license components for the Vulkan-Loader package.
 
 
 %prep
-%setup -q -n Vulkan-Loader-1.3.248
-cd %{_builddir}/Vulkan-Loader-1.3.248
+%setup -q -n Vulkan-Loader-1.3.249
+cd %{_builddir}/Vulkan-Loader-1.3.249
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682276583
+export SOURCE_DATE_EPOCH=1682979303
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 %cmake .. -DBUILD_WSI_DIRECTFB_SUPPORT=OFF
 make  %{?_smp_mflags}
 popd
@@ -113,10 +113,10 @@ export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export PKG_CONFIG_PATH="/usr/lib32/pkgconfig:/usr/share/pkgconfig"
 export ASFLAGS="${ASFLAGS}${ASFLAGS:+ }--32"
 export CFLAGS="${CFLAGS}${CFLAGS:+ }-m32 -mstackrealign"
@@ -137,7 +137,7 @@ cd ../clr-build32;
 make test || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1682276583
+export SOURCE_DATE_EPOCH=1682979303
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/Vulkan-Loader
 cp %{_builddir}/Vulkan-Loader-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/Vulkan-Loader/9bf8124f4495a48c4fd7104aebe2e957176b930b || :
@@ -177,12 +177,12 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libvulkan.so.1
-/usr/lib64/libvulkan.so.1.3.248
+/usr/lib64/libvulkan.so.1.3.249
 
 %files lib32
 %defattr(-,root,root,-)
 /usr/lib32/libvulkan.so.1
-/usr/lib32/libvulkan.so.1.3.248
+/usr/lib32/libvulkan.so.1.3.249
 
 %files license
 %defattr(0644,root,root,0755)
