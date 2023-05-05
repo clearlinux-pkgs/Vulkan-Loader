@@ -4,10 +4,10 @@
 # Using build pattern: cmake
 #
 Name     : Vulkan-Loader
-Version  : 1.3.249
-Release  : 127
-URL      : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.249/Vulkan-Loader-1.3.249.tar.gz
-Source0  : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.249/Vulkan-Loader-1.3.249.tar.gz
+Version  : 1.3.250
+Release  : 128
+URL      : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.250/Vulkan-Loader-1.3.250.tar.gz
+Source0  : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.250/Vulkan-Loader-1.3.250.tar.gz
 Summary  : Vulkan Loader
 Group    : Development/Tools
 License  : Apache-2.0
@@ -85,15 +85,15 @@ license components for the Vulkan-Loader package.
 
 
 %prep
-%setup -q -n Vulkan-Loader-1.3.249
-cd %{_builddir}/Vulkan-Loader-1.3.249
+%setup -q -n Vulkan-Loader-1.3.250
+cd %{_builddir}/Vulkan-Loader-1.3.250
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682979303
+export SOURCE_DATE_EPOCH=1683304190
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -104,6 +104,23 @@ export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -f
 export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+%cmake .. -DBUILD_WSI_DIRECTFB_SUPPORT=OFF
+make  %{?_smp_mflags}
+popd
+mkdir -p clr-build-avx2
+pushd clr-build-avx2
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 %cmake .. -DBUILD_WSI_DIRECTFB_SUPPORT=OFF
 make  %{?_smp_mflags}
 popd
@@ -135,9 +152,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 cd clr-build; make test || :
 cd ../clr-build32;
 make test || : || :
+cd ../clr-build-avx2;
+make test || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1682979303
+export SOURCE_DATE_EPOCH=1683304190
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/Vulkan-Loader
 cp %{_builddir}/Vulkan-Loader-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/Vulkan-Loader/9bf8124f4495a48c4fd7104aebe2e957176b930b || :
@@ -156,15 +175,20 @@ for i in *.pc ; do ln -s $i 32$i ; done
 popd
 fi
 popd
+pushd clr-build-avx2
+%make_install_v3  || :
+popd
 pushd clr-build
 %make_install
 popd
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
 
 %files dev
 %defattr(-,root,root,-)
+/V3/usr/lib64/libvulkan.so
 /usr/lib64/libvulkan.so
 /usr/lib64/pkgconfig/vulkan.pc
 
@@ -176,13 +200,15 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/libvulkan.so.1
+/V3/usr/lib64/libvulkan.so.1.3.250
 /usr/lib64/libvulkan.so.1
-/usr/lib64/libvulkan.so.1.3.249
+/usr/lib64/libvulkan.so.1.3.250
 
 %files lib32
 %defattr(-,root,root,-)
 /usr/lib32/libvulkan.so.1
-/usr/lib32/libvulkan.so.1.3.249
+/usr/lib32/libvulkan.so.1.3.250
 
 %files license
 %defattr(0644,root,root,0755)
