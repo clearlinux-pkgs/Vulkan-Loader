@@ -4,10 +4,10 @@
 # Using build pattern: cmake
 #
 Name     : Vulkan-Loader
-Version  : 1.3.263
-Release  : 141
-URL      : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.263/Vulkan-Loader-1.3.263.tar.gz
-Source0  : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.263/Vulkan-Loader-1.3.263.tar.gz
+Version  : 1.3.264
+Release  : 142
+URL      : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.264/Vulkan-Loader-1.3.264.tar.gz
+Source0  : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.264/Vulkan-Loader-1.3.264.tar.gz
 Summary  : Vulkan Loader
 Group    : Development/Tools
 License  : Apache-2.0
@@ -85,15 +85,15 @@ license components for the Vulkan-Loader package.
 
 
 %prep
-%setup -q -n Vulkan-Loader-1.3.263
-cd %{_builddir}/Vulkan-Loader-1.3.263
+%setup -q -n Vulkan-Loader-1.3.264
+cd %{_builddir}/Vulkan-Loader-1.3.264
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1694015551
+export SOURCE_DATE_EPOCH=1694471461
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -156,7 +156,7 @@ cd ../clr-build-avx2;
 make test || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1694015551
+export SOURCE_DATE_EPOCH=1694471461
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/Vulkan-Loader
 cp %{_builddir}/Vulkan-Loader-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/Vulkan-Loader/9bf8124f4495a48c4fd7104aebe2e957176b930b || :
@@ -199,14 +199,14 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libvulkan.so.1.3.263
+/V3/usr/lib64/libvulkan.so.1.3.264
 /usr/lib64/libvulkan.so.1
-/usr/lib64/libvulkan.so.1.3.263
+/usr/lib64/libvulkan.so.1.3.264
 
 %files lib32
 %defattr(-,root,root,-)
 /usr/lib32/libvulkan.so.1
-/usr/lib32/libvulkan.so.1.3.263
+/usr/lib32/libvulkan.so.1.3.264
 
 %files license
 %defattr(0644,root,root,0755)
