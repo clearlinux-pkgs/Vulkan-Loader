@@ -4,10 +4,10 @@
 # Using build pattern: cmake
 #
 Name     : Vulkan-Loader
-Version  : 1.3.264
-Release  : 142
-URL      : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.264/Vulkan-Loader-1.3.264.tar.gz
-Source0  : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.264/Vulkan-Loader-1.3.264.tar.gz
+Version  : 1.3.265
+Release  : 143
+URL      : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.265/Vulkan-Loader-1.3.265.tar.gz
+Source0  : https://github.com/KhronosGroup/Vulkan-Loader/archive/v1.3.265/Vulkan-Loader-1.3.265.tar.gz
 Summary  : Vulkan Loader
 Group    : Development/Tools
 License  : Apache-2.0
@@ -85,15 +85,15 @@ license components for the Vulkan-Loader package.
 
 
 %prep
-%setup -q -n Vulkan-Loader-1.3.264
-cd %{_builddir}/Vulkan-Loader-1.3.264
+%setup -q -n Vulkan-Loader-1.3.265
+cd %{_builddir}/Vulkan-Loader-1.3.265
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1694471461
+export SOURCE_DATE_EPOCH=1695747535
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -156,7 +156,7 @@ cd ../clr-build-avx2;
 make test || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1694471461
+export SOURCE_DATE_EPOCH=1695747535
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/Vulkan-Loader
 cp %{_builddir}/Vulkan-Loader-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/Vulkan-Loader/9bf8124f4495a48c4fd7104aebe2e957176b930b || :
@@ -188,25 +188,29 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
+/usr/lib64/cmake/VulkanLoader/VulkanLoaderConfig-relwithdebinfo.cmake
+/usr/lib64/cmake/VulkanLoader/VulkanLoaderConfig.cmake
 /usr/lib64/libvulkan.so
 /usr/lib64/pkgconfig/vulkan.pc
 
 %files dev32
 %defattr(-,root,root,-)
+/usr/lib32/cmake/VulkanLoader/VulkanLoaderConfig-relwithdebinfo.cmake
+/usr/lib32/cmake/VulkanLoader/VulkanLoaderConfig.cmake
 /usr/lib32/libvulkan.so
 /usr/lib32/pkgconfig/32vulkan.pc
 /usr/lib32/pkgconfig/vulkan.pc
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libvulkan.so.1.3.264
+/V3/usr/lib64/libvulkan.so.1.3.265
 /usr/lib64/libvulkan.so.1
-/usr/lib64/libvulkan.so.1.3.264
+/usr/lib64/libvulkan.so.1.3.265
 
 %files lib32
 %defattr(-,root,root,-)
 /usr/lib32/libvulkan.so.1
-/usr/lib32/libvulkan.so.1.3.264
+/usr/lib32/libvulkan.so.1.3.265
 
 %files license
 %defattr(0644,root,root,0755)
