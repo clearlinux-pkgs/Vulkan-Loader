@@ -3,3 +3,4 @@
 Vulkan-Headers-dev
 libX11-dev
 libX11-dev32
+libX11-lib
